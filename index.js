@@ -3,18 +3,19 @@ const Eris = require('eris');
 
 const client = new Eris(config.token, { getAllUsers: true });
 const prefix = config.prefix;
+owner_id = null;
 
 process.on('unhandledRejection', error => {
     // Will print "unhandledRejection err is not defined"
     console.error(error);
 });
 
-client.on('ready', () => {
+client.on('ready', async () => {
     console.log('The bot is ready!');
     client.editStatus('online', {
         name: prefix.toLowerCase() + " help"
     });
-
+    owner_id = (await client.getOAuthApplication()).owner.id;
 });
 
 client.on('messageCreate', async (msg) => {
@@ -279,7 +280,7 @@ You can execute up to two commands in a single message by separating them with \
         }
     },
     async eval(msg, words, text) {
-        if (msg.author.id !== '103347843934212096') return 'NOU';
+        if (msg.author.id !== owner_id) return ':x: NOU';
         let code = `async () => {
     ${text}
 }`;
@@ -293,7 +294,7 @@ You can execute up to two commands in a single message by separating them with \
         }
     },
     async ping(msg, words) {
-        return 'Pong!';
+        return ':ping_pong: Pong!';
     },
     async table(msg, words) {
         let game = games[msg.channel.id];
@@ -327,7 +328,7 @@ You can execute up to two commands in a single message by separating them with \
                 }
             }
             game.dealAll(2, baddies);
-            console.log(baddies);
+            ///console.log(baddies);
             if (baddies.length > 0)
                 return `Uh oh! ${baddies.map(p => `**${p.member.user.username}**`).join(', ')}, you didn't say UNO! Pick up 2!`;
             else return 'There is nobody to call out.'
@@ -529,7 +530,7 @@ class Player {
             }
         }
         color = _color;
-        console.log(color, id);
+        ///console.log(color, id);
         if (['WILD', 'WILD+4'].includes(id.toUpperCase())) {
             let card = this.hand.find(c => c.id === id.toUpperCase());
             if (!card) return undefined;
