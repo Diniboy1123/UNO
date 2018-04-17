@@ -263,9 +263,9 @@ You can execute up to two commands in a single message by separating them with \
             return "There aren't enough people to play!";
         }
     },
-    async invite(msg, words) {
+    /*async invite(msg, words) {
         return '<https://discordapp.com/oauth2/authorize?client_id=' + client.user.id + '&scope=bot&permissions=0>';
-    },
+    },*/
     async stats(msg, words) {
         var memory = process.memoryUsage();
         return {
