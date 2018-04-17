@@ -18,6 +18,7 @@ client.on('ready', () => {
 });
 
 client.on('messageCreate', async (msg) => {
+    if (msg.author.bot) return; // we don't want to notice any bot messages
     if (msg.content.toLowerCase().startsWith(prefix)) {
         let segments = msg.content.substring(prefix.length).trim().split('&&');
         if (segments.length > 2) return await msg.channel.createMessage('Sorry, you can only execute up to **two** commands with a single message!');
@@ -263,7 +264,7 @@ You can execute up to two commands in a single message by separating them with \
         }
     },
     async invite(msg, words) {
-        return '<https://discordapp.com/oauth2/authorize?client_id=403419413904228352&scope=bot&permissions=0>';
+        return '<https://discordapp.com/oauth2/authorize?client_id=' + client.user.id + '&scope=bot&permissions=0>';
     },
     async stats(msg, words) {
         var memory = process.memoryUsage();
