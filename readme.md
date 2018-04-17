@@ -1,8 +1,3 @@
-# the time you spent looking at this readme could have been spent being productive
+# UNO Bot
 
-readmes kill. play uno instead. uno saves lives.
-
-## TODO
-
-- Configurable rules
-- AIs
+Another fork of the [https://github.com/Ratismal/UNO](UNO) Bot modified for my needs

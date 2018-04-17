@@ -10,7 +10,11 @@ process.on('unhandledRejection', error => {
 });
 
 client.on('ready', () => {
-    console.log('ready!');
+    console.log('The bot is ready!');
+    client.editStatus('online', {
+        name: prefix.toLowerCase() + " help"
+    });
+
 });
 
 client.on('messageCreate', async (msg) => {
