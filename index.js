@@ -253,6 +253,7 @@ You can execute up to two commands in a single message by separating them with \
     },
     async start(msg, words) {
         let game = games[msg.channel.id];
+        if (game === undefined) return `Start a game first by executing the \`${config.prefix} join\` command!`;
         if (game.queue.length > 1) {
             if (game.player.id !== msg.author.id)
                 return "Sorry, but you can't start a game you didn't create!";
