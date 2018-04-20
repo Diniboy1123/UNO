@@ -3,7 +3,7 @@ const Eris = require('eris');
 
 const client = new Eris(config.token, { getAllUsers: true });
 const prefix = config.prefix;
-owner_id = null;
+var owner_id = null;
 
 process.on('unhandledRejection', error => {
     // Will print "unhandledRejection err is not defined"
@@ -15,7 +15,13 @@ client.on('ready', async () => {
     client.editStatus('online', {
         name: prefix.toLowerCase() + " help"
     });
-    owner_id = (await client.getOAuthApplication()).owner.id;
+
+    if (!(config.hasOwnProperty('owner_id')) || config.owner_id != "") {
+        owner_id = config.owner_id;
+    }
+    else {
+        owner_id = (await client.getOAuthApplication()).owner.id;
+    }
 });
 
 client.on('messageCreate', async (msg) => {
