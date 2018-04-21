@@ -102,7 +102,7 @@ You can execute up to two commands in a single message by separating them with \
             return "You've already registered for this game!";
         else {
             if (game.queue.length === 1) {
-                return 'A game has been registered! Once all players have joined, type `uno start` to begin the game!';
+                return `A game has been registered! Once all players have joined, type \`${config.prefix} start\` to begin the game!`;
             } else {
                 return 'You have joined the game! Please wait for it to start.'
             }
@@ -227,7 +227,7 @@ You can execute up to two commands in a single message by separating them with \
                 };
             } else return "Sorry, you can't play that card here!";
 
-        } else return "Sorry, but a game hasn't been created yet! Do `uno join` to create one.";
+        } else return `Sorry, but a game hasn't been created yet! Do \`${config.prefix} join\` to create one.`;
     },
     async d(msg, words) { return await commands.pickup(msg, words); },
     async draw(msg, words) { return await commands.pickup(msg, words); },
@@ -249,7 +249,7 @@ You can execute up to two commands in a single message by separating them with \
                 }
             };
 
-        } else return "Sorry, but a game hasn't been created yet! Do `uno join` to create one.";
+        } else return `Sorry, but a game hasn't been created yet! Do \`${config.prefix} join\` to create one.`;
     },
     async start(msg, words) {
         let game = games[msg.channel.id];
@@ -532,7 +532,7 @@ class Player {
             id = temp;
             _color = this.parseColor(color);
             if (!_color) {
-                this.game.send('You have to specify a valid color! Colors are **red**, **yellow**, **green**, and **blue**.\n`uno play <color> <value>`');
+                this.game.send(`You have to specify a valid color! Colors are **red**, **yellow**, **green**, and **blue**.\n\`${config.prefix} play <color> <value>\``);
                 return null;
             }
         }
